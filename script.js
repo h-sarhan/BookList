@@ -9,7 +9,8 @@ const authorList = document.querySelector(".book-author");
 const isbnList = document.querySelector(".book-isbn");
 const deleteButton = document.querySelector(".deleteMe");
 let storedBooks;
-
+let counter = -1;
+let c = -1;
 //Defining the book class
 class Book {
 	constructor(title, author, isbn) {
@@ -31,50 +32,64 @@ if (localStorage.getItem("Books") == null) {
 }
 
 function addBook(book) {
+	counter++;
 	let bookTitle = document.createElement("li");
-	bookTitle.className = "title";
+	bookTitle.className = `title li-${counter}`;
 	bookTitle.textContent = book.title;
 	titleList.appendChild(bookTitle);
 	let bookAuthor = document.createElement("li");
-	bookAuthor.className = "author";
+	bookAuthor.className = `author li-${counter}`;
 	bookAuthor.textContent = book.author;
 	authorList.appendChild(bookAuthor);
 	let bookIsbn = document.createElement("li");
-	bookIsbn.className = "isbn";
+	bookIsbn.className = `isbn li-${counter}`;
 	bookIsbn.textContent = book.isbn;
 	isbnList.appendChild(bookIsbn);
 }
 
 function addDelete(book) {
+	c++;
 	let deleteList = document.createElement("li");
 	deleteButton.appendChild(deleteList);
 	let deleteBtn = document.createElement("a");
 	deleteBtn.textContent = "X";
 	deleteBtn.setAttribute("href", "#");
+	deleteBtn.setAttribute("id", `${c}`);
+
 	deleteList.appendChild(deleteBtn);
-	deleteBtn.addEventListener("click", () => {
-		document.querySelector(".title").remove();
-		document.querySelector(".author").remove();
-		document.querySelector(".isbn").remove();
-		deleteBtn.remove();
+	deleteBtn.addEventListener("click", e => {
 		message.textContent = "Book has been removed";
 		message.className = "bg-success d-block";
 		window.setTimeout(() => {
 			message.className = "d-none";
 		}, 3000);
-
+		let removeIndex = e.target.getAttribute("id");
+		console.log(removeIndex);
+		let toRemove = document.querySelectorAll(`.li-${removeIndex}`);
+		console.log(toRemove);
+		toRemove.forEach(li => {
+			console.log(li);
+			li.remove();
+		});
+		deleteList.remove();
 		removeFromStorage(book);
 	});
 }
 
 function removeFromStorage(book) {
 	let r = localStorage.getItem("Books");
+
 	r = JSON.parse(r);
-	console.log(r);
-	let i = r.indexOf(book.name);
-	console.log(i);
-	r.splice(i, 1);
-	console.log(r);
+	r.forEach((bk, index) => {
+		if (bk.isbn == book.isbn) {
+			r.splice(index, 1);
+		}
+	});
+	// console.log(r);
+	// let i = r.findIndex(obj => obj.isbn == book.isbn);
+	// console.log(i);
+	// r.splice(i, 1);
+	// console.log(r);
 	r = JSON.stringify(r);
 	localStorage.setItem("Books", r);
 }
