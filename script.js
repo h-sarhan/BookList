@@ -34,15 +34,15 @@ if (localStorage.getItem("Books") == null) {
 function addBook(book) {
 	counter++;
 	let bookTitle = document.createElement("li");
-	bookTitle.className = `title li-${counter}`;
+	bookTitle.className = `title li-${counter} list-group-item p-0`;
 	bookTitle.textContent = book.title;
 	titleList.appendChild(bookTitle);
 	let bookAuthor = document.createElement("li");
-	bookAuthor.className = `author li-${counter}`;
+	bookAuthor.className = `author li-${counter} list-group-item p-0`;
 	bookAuthor.textContent = book.author;
 	authorList.appendChild(bookAuthor);
 	let bookIsbn = document.createElement("li");
-	bookIsbn.className = `isbn li-${counter}`;
+	bookIsbn.className = `isbn li-${counter} list-group-item  p-0`;
 	bookIsbn.textContent = book.isbn;
 	isbnList.appendChild(bookIsbn);
 }
@@ -53,6 +53,7 @@ function addDelete(book) {
 	deleteButton.appendChild(deleteList);
 	let deleteBtn = document.createElement("a");
 	deleteBtn.textContent = "X";
+	deleteBtn.className = "list-group-item ";
 	deleteBtn.setAttribute("href", "#");
 	deleteBtn.setAttribute("id", `${c}`);
 
