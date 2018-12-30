@@ -13,6 +13,42 @@
 		/>
 	</head>
 	<body>
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8 mt-3 ml-3">
+				<h1>Add Book</h1>
+				<div class="message d-none"></div>
+				<form>
+					<label for="title" class="font-weight-bold">Title</label>
+					<input type="text" name="title" id="title" class="form-control" />
+					<label for="author" class="font-weight-bold my-2">Author</label>
+					<input type="text" name="author" id="author" class="form-control" />
+					<label for="isbn" class="font-weight-bold my-2">ISBN #</label>
+					<input type="text" name="isbn" id="isbn" class="form-control" />
+					<button class=" btn btn-block btn-outline-dark my-2">SUBMIT</button>
+				</form>
+				<div class="row my-3">
+					<div class="col-4 font-weight-bold p-0">
+						<div class="border-bottom pb-2">Title</div>
+						<ul class="book-title list" style="list-style: none;"></ul>
+					</div>
+					<div class="col-3 font-weight-bold p-0">
+						<div class="border-bottom pb-2">Author</div>
+						<ul class="book-author" style="list-style: none;"></ul>
+					</div>
+					<div class="col-4 font-weight-bold p-0">
+						<div class="border-bottom pb-2">ISBN</div>
+						<ul class="book-isbn" style="list-style: none;"></ul>
+					</div>
+					<div class="col-1  p-0">
+						<ul class="deleteMe p-0" style="list-style: none;">
+							<div class="border-bottom font-weight-bold pb-2">Delete</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<script src="script.js"></script>
 		<script
 			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
